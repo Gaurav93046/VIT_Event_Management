@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <style>
+      /* CSS code for the form */
+body {
+  background-image: url("https://riviera.vit.ac.in/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhero.0c9bbd32.webp&w=1920&q=75");
+  background-size: cover;
+}
+
+input.ng-invalid.ng-dirty {
+  border-color: #ff0000;
+}
+
+select.ng-invalid.ng-dirty {
+  border-color: #ff0000;
+}
+
+span {
+  color: #ff0000;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+/* CSS code for the form */
+/* Center the form on the page */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 50px auto;
+  max-width: 600px;
+}
+
+/* Style the form title */
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #4CAF50;
+}
+
+/* Style the labels */
+label {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #12df23;
+}
+
+/* Style the input fields */
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.2rem;
+}
+
+/* Style the submit button */
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin-top: 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+/* Style the error messages */
+.ng-invalid.ng-dirty + div {
+  margin-top: -10px;
+}
+
+.ng-invalid.ng-dirty input {
+  border-color: #f44336;
+}
+
+.ng-invalid.ng-dirty select {
+  border-color: #f44336;
+}
+
+.ng-invalid.ng-dirty + div span {
+  font-size: 1rem;
+  color: #f44336;
+}
+
+/* Add some animations */
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px #4CAF50;
+}
+
+button[type="submit"] {
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+input[type="password"],
+select {
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:hover,
+input[type="date"]:hover,
+input[type="tel"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+select:hover {
+  border-color: #4CAF50;
+}
+
+    </style>
+    <style>
+
+    </style>
+    <script>
+        var app = angular.module('myApp', []);
+
+app.controller('formCtrl', function($scope) {
+  $scope.formData = {};
+
+  $scope.submitForm = function() {
+        
+        console.log(0);
+
+      $.ajax(
+      {
+      url: '/send',
+      type: 'POST',
+      success: function(result){
+          window.open("/payment.html",'_self');
+        }
+      });
+  };
+});
+    </script>
+
+    <script>
+      $("#btn").click(()=>{
+        console.log(0);
+      });
+    </script>
+</head>
+<body>
+    
+    <!-- HTML code for the form -->
+<div ng-app="myApp" ng-controller="formCtrl">
+  <form name="myForm" ng-submit="submitForm()" novalidate>
+    <h2>Riviera Form</h2>
+    <label>Name:</label>
+    <input type="text" name="name" ng-model="formData.name" required>
+    <div ng-show="myForm.name.$dirty && myForm.name.$invalid">
+      <span ng-show="myForm.name.$error.required">Name is required.</span>
+    </div>
+    
+    <label>Date of Birth:</label>
+    <input type="date" name="dob" ng-model="formData.dob" required>
+    <div ng-show="myForm.dob.$dirty && myForm.dob.$invalid">
+      <span ng-show="myForm.dob.$error.required">Date of Birth is required.</span>
+    </div>
+    
+    <label>Session:</label>
+    <select name="session" ng-model="formData.session" required>
+      <option value="">--Select--</option>
+      <option value="2020-21">2020-21</option>
+      <option value="2021-22">2021-22</option>
+      <option value="2022-23">2022-23</option>
+      <option value="2023-24">2023-24</option>
+    </select>
+    <div ng-show="myForm.session.$dirty && myForm.session.$invalid">
+      <span ng-show="myForm.session.$error.required">Session is required.</span>
+    </div>
+    
+    <label>Phone Number:</label>
+    <input type="tel" name="phone" ng-model="formData.phone" required pattern="[0-9]{10}">
+    <div ng-show="myForm.phone.$dirty && myForm.phone.$invalid">
+      <span ng-show="myForm.phone.$error.required">Phone number is required.</span>
+      <span ng-show="myForm.phone.$error.pattern">Invalid phone number.</span>
+    </div>
+    
+    <label>Email ID:</label>
+    <input type="email" name="email" ng-model="formData.email" required>
+    <div ng-show="myForm.email.$dirty && myForm.email.$invalid">
+      <span ng-show="myForm.email.$error.required">Email ID is required.</span>
+      <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+    </div>
+    
+    <label>Password:</label>
+    <input type="password" name="password" ng-model="formData.password" required minlength="6">
+    <div ng-show="myForm.password.$dirty && myForm.password.$invalid">
+      <span ng-show="myForm.password.$error.required">Password is required.</span>
+      <span ng-show="myForm.password.$error.minlength">Password should be at least 6 characters long.</span>
+    </div>
+    
+    <label>Confirm Password:</label>
+    <input type="password" name="confirmPassword" ng-model="formData.confirmPassword" required match-password="formData.password">
+    <div ng-show="myForm.confirmPassword.$dirty && myForm.confirmPassword.$invalid">
+      <span ng-show="myForm.confirmPassword.$error.required">Confirm Password is required.</span>
+      <span ng-show="myForm.confirmPassword.$error.matchPassword">Passwords do not match.</span>
+    </div>
+    
+    <button id="btn" type="submit">Submit
+
+</body>
+</html>

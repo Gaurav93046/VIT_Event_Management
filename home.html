@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Event Management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#"><b>VIT</b> Event Management</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a onclick="location.reload();" class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a onclick="window.open('Event.html');" class="nav-link" href="#">Events</a>
+          </li>
+          <li class="nav-item">
+            <a onclick="window.open('About.html');" class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#downnnn">Contact</a>
+          </li>
+        </ul>
+        <script>
+          // Countdown timer
+          // const countDownDate = new Date("Oct 31, 2023 00:00:00").getTime();
+
+          const x = setInterval(function () {
+
+            const now = new Date().getTime();
+
+            const distance = countDownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+            if (distance < 0) {
+              clearInterval(x);
+              document.getElementById("countdown").innerHTML = "EVENT HAS ENDED";
+            }
+          }, 1000);
+
+          // Registration form submission
+          const form = document.querySelector('form');
+
+
+
+          // Smooth scrolling on navigation click
+          const navLinks = document.querySelectorAll('.nav-link');
+
+          navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+              e.preventDefault();
+              const id = this.getAttribute('href');
+              document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+            });
+          });
+
+          // Tooltips for events
+          const tooltips = document.querySelectorAll('.event-tooltip');
+
+          tooltips.forEach(tooltip => {
+            tooltip.addEventListener('mouseover', function () {
+              this.querySelector('.tooltip-content').style.display = 'block';
+            });
+
+            tooltip.addEventListener('mouseout', function () {
+              this.querySelector('.tooltip-content').style.display = 'none';
+            });
+          });
+          // Show and hide mobile navigation
+          $('.navbar-toggler').click(function () {
+            $('.navbar-collapse').slideToggle();
+          });
+
+          // Change active navigation link on scroll
+          $(window).scroll(function () {
+            const position = $(this).scrollTop();
+
+            $('.nav-link').each(function () {
+              const target = $(this).attr('href');
+              const targetPosition = $(target).offset().top;
+              const targetHeight = $(target).outerHeight();
+              if (targetPosition - 70 <= position && targetPosition + targetHeight > position) {
+                $('.nav-link').removeClass('active');
+                $(this).addClass('active');
+              } else {
+                $(this).removeClass('active');
+              }
+            });
+          });
+
+          // Modal for event registration
+          $('.event-register').click(function () {
+            const eventTitle = $(this).siblings('.event-title').text();
+            $('#eventModal .modal-title').text(eventTitle);
+            $('#eventModal').modal('show');
+          });
+
+          // Show tooltip on mobile devices
+          if (/Mobi|Android/i.test(navigator.userAgent)) {
+            $('.event-tooltip').click(function () {
+              $(this).toggleClass('active');
+            });
+          }
+
+          $(document).ready(()=>
+          {
+            $("#btn1").click((e)=>{
+              e.preventDefault();
+              var x = $("#event").val();
+              if(x === 'Rivera')
+              window.open('/public/index.html','_self');
+              else if(x === 'Gravitas')
+              window.open('/ev/index.html','_self');
+              else
+              window.open('/ev2/index.html','_self');
+            });
+          });
+        </script>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <!-- <img src="new.jpg" alt=""> -->
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">VIT Upcoming Event</h1>
+        <p class="lead">VIT Event Management is a premier event management company located in Vellore, Tamil Nadu. We specialize in organizing all types of fests, including cultural, technical, and sports events, for students and faculty members of VIT University.
+
+          Our team of experienced event managers and coordinators work tirelessly to ensure that each event is well-planned, well-organized, and executed flawlessly. We strive to create memorable and enjoyable experiences for our clients and their guests.
+          
+          Whether it's a music festival, a hackathon, a dance competition, or a sports tournament, we have the expertise to plan and manage it from start to finish. Our services include event planning, budgeting, venue selection, event marketing, ticketing, and on-site management.
+          
+          At VIT Event Management, we believe that every event is unique and deserves personalized attention. We work closely with our clients to understand their vision, goals, and requirements, and tailor our services accordingly. We take care of all the details so that our clients can focus on enjoying their event and creating memories that will last a lifetime.
+          
+          If you're looking for a reliable and professional event management company for your next event at VIT University, look no further than VIT Event Management. Contact us today to learn more about our services and how we can help make your event a success..</p>
+        <p class="lead">
+          <a href="#down" target="_self" class="btn btn-primary my-2">Register Now</a>
+        </p>
+        <div class="countdown">
+          <h2>Event Countdown</h2>
+          <div id="days"></div>
+          <div id="hours"></div>
+          <div id="minutes"></div>
+          <div id="seconds"></div>
+        </div>
+      </div>
+    </section>
+    <section class="container">
+      <div id="down"></div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <img onclick="window.open('/public/index.html','_self');" class="card-img-top" src="Riviera-web.jpg" alt="Event">
+            <div class="card-body">
+              <h4 class="card-title">Riviera</h4>
+              <p class="card-text" align = "justify">Riviera is the annual cultural festival of VIT University, Vellore. The festival attracts a large number 
+              of students from across the country who participate in various cultural and artistic events. Riviera features a wide range 
+              of activities, including music, dance, drama, art, and literature. The festival also includes fun activities, food stalls,
+               and celebrity performances. Riviera provides a platform for students to showcase their talents, learn from experts, 
+               and create lasting memories.
+            </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <img onclick="window.open('/ev/index.html','_self');" class="card-img-top" src="Gra.jpg" alt="Event">
+            <div class="card-body">
+              <h4 class="card-title">graVITas VIT</h4>
+              <p class="card-text">graVITas is the annual techno-management festival of VIT Vellore that provides a platform for students from all over India to showcase their skills and creativity. The festival features a range of activities, including technical workshops, guest lectures, exhibitions, cultural events, and a startup expo. With a changing theme every year, graVITas is an exciting
+                 and enriching experience for students who want to explore the world of technology and innovation.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <img onclick="window.open('/ev2/index.html','_self');" class="card-img-top" src="Arts1.jpg" alt="Event">
+            <div class="card-body">
+              <h4 class="card-title">Clubs and chapters</h4>
+              <p class="card-text">VIT Vellore has a diverse range of clubs and chapters, including music, drama, entrepreneurship, photography, robotics, literary, TEDxVIT, programming, and sports. These clubs provide a platform for students to pursue their interests, develop new skills,
+                 and interact with like-minded individuals through various events and activities.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="container">
+      <h2 class="reg"> Register for an event</h2>
+          <select class="form-control" id="event">
+            <option value="Rivera">Riviera</option>
+            <option value="Gravitas">graVITas</option>
+            <option value="">Clubs and chapters</option>
+          </select>
+          <br>
+          <button id="btn1" class="btn btn-primary">Register</button>
+  </main>
+  <footer class="py-4 bg-dark text-white">
+    <div class="container">
+      <div class="row">
+        <div id="downnnn" class="col-md-6">
+          <h5>VIT Event Management</h5>
+          <p>VIT Event Management is a premier event management company that organizes various fests, including cultural, technical, and sports events, for students and faculty members of VIT University in Vellore. Our team of experienced event managers and coordinators work tirelessly to ensure that each event is well-planned, well-organized, and executed flawlessly.
+             Contact us to learn more about our services and how we can help make your event a success.</p>
+        </div>
+        <div class="col-md-6">
+          <h5>Contact Us</h5>
+          <ul class="list-unstyled">
+            <li>SJT12 VIT University</li>
+            <li>Vellore, Tamil Nadu</li>
+            <li>Phone: (123) 456-7890</li>
+            <li>Email: VITEventManagement@vitstudent.ac.in</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Bootstrap and jQuery Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

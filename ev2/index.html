@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="es3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<style>
+  /* CSS code for the form */
+body {
+    background-image: url("https://vit.ac.in/sites/default/files/header_banner/046.jpg");
+    background-size: cover;
+  }
+  
+  input.ng-invalid.ng-dirty {
+    border-color: #ff0000;
+  }
+  
+  select.ng-invalid.ng-dirty {
+    border-color: #ff0000;
+  }
+  
+  span {
+    color: #ff0000;
+  }
+  
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* CSS code for the form */
+  /* Center the form on the page */
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto;
+    max-width: 600px;
+  }
+  
+  /* Style the form title */
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #4CAF50;
+  }
+  
+  /* Style the labels */
+  label {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #58f174;
+  }
+  
+  /* Style the input fields */
+  input[type="text"],
+  input[type="date"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="password"],
+  select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 1.2rem;
+  }
+  
+  /* Style the submit button */
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin-top: 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Style the error messages */
+  .ng-invalid.ng-dirty + div {
+    margin-top: -10px;
+  }
+  
+  .ng-invalid.ng-dirty input {
+    border-color: #f44336;
+  }
+  
+  .ng-invalid.ng-dirty select {
+    border-color: #f44336;
+  }
+  
+  .ng-invalid.ng-dirty + div span {
+    font-size: 1rem;
+    color: #f44336;
+  }
+  
+  /* Add some animations */
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  input[type="tel"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px #4CAF50;
+  }
+  
+  button[type="submit"] {
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="password"],
+  select {
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="text"]:hover,
+  input[type="date"]:hover,
+  input[type="tel"]:hover,
+  input[type="email"]:hover,
+  input[type="password"]:hover,
+  select:hover {
+    border-color: #4CAF50;
+  }
+  
+</style>
+
+<body>
+    <form method="post"  id="myForm" name="myForm" action="/send" onsubmit="submitForm(event)">
+        <h2>Clubs and chapters Form</h2>
+        <label>Name:</label>
+        <input type="text" name="name" id="name" required>
+        <label>Date of Birth:</label>
+        <input type="date" name="dob" id="dob" required>
+        <label>Session:</label>
+        <select name="session" id="session" required>
+          <option value="">--Select--</option>
+          <option value="2020-21">2020-21</option>
+          <option value="2021-22">2021-22</option>
+          <option value="2022-23">2022-23</option>
+          <option value="2023-24">2023-24</option>
+        </select>
+        <label>Phone Number:</label>
+        <input type="tel" name="phone" id="phone" pattern="[0-9]{10}" required>
+        <label>Email:</label>
+        <input type="email" name="email" id="email" required>
+        <label>Password:</label>
+        <input type="password" name="password" id="password" minlength="8" required>
+        <label>Confirm Password:</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" minlength="8" required>
+        <input type="submit" value="Submit">
+      </form>
+<script>
+    $(document).ready(function() {
+  $('#myForm').submit(function(event) {
+    // Prevent the form from submitting
+    event.preventDefault();
+
+    // Get the form values
+    var name = $('#name').val();
+    var dob = $('#dob').val();
+    var session = $('#session').val();
+    var phone = $('#phone').val();
+    var email = $('#email').val();
+    var password = $('#password').val();
+    var confirmPassword = $('#confirmPassword').val();
+
+    // Validate the form
+    var isValid = true;
+
+    // Validate name
+    if (!name) {
+      $('#name').addClass('error');
+      isValid = false;
+    } else {
+      $('#name').removeClass('error');
+    }
+
+    // Validate date of birth
+    if (!dob) {
+      $('#dob').addClass('error');
+      isValid = false;
+    } else {
+      $('#dob').removeClass('error');
+    }
+
+    // Validate session
+    if (!session) {
+      $('#session').addClass('error');
+      isValid = false;
+    } else {
+      $('#session').removeClass('error');
+    }
+
+    // Validate phone number
+    if (!phone || !phone.match("[0-9]{10}")) {
+      $('#phone').addClass('error');
+      isValid = false;
+    } else {
+      $('#phone').removeClass('error');
+    }
+
+    // Validate email
+    if (!email || !email.match(/\S+@\S+\.\S+/)) {
+      $('#email').addClass('error');
+      isValid = false;
+    } else {
+      $('#email').removeClass('error');
+    }
+
+    // Validate password
+    if (!password || password.length < 8) {
+      $('#password').addClass('error');
+      isValid = false;
+    } else {
+      $('#password').removeClass('error');
+    }
+
+    // Validate confirm password
+    if (!confirmPassword || confirmPassword.length < 8 || confirmPassword !== password) {
+      $('#confirmPassword').addClass('error');
+      isValid = false;
+    } else {
+      $('#confirmPassword').removeClass('error');
+   
+    }
+
+    $.ajax(
+      {
+      url: '/send',
+      type: 'POST',
+      success: function(result){
+          window.open("/payment.html",'_self');
+        }
+      });
+
+// If the form is valid, submit it
+if (isValid) {
+  $('#myForm').unbind('submit').submit();
+}
+});
+});
+
+</script>      
+</body>
+</html>

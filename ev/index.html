@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="es2.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    
+</head>
+<style>
+  /* CSS code for the form */
+body {
+    background-image: url("https://vit.ac.in/gravitas/img/gravitas-final.png");
+    background-size: cover;
+  }
+  
+  input.ng-invalid.ng-dirty {
+    border-color: #ff0000;
+  }
+  
+  select.ng-invalid.ng-dirty {
+    border-color: #ff0000;
+  }
+  
+  span {
+    color: #ff0000;
+  }
+  
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* CSS code for the form */
+  /* Center the form on the page */
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto;
+    max-width: 600px;
+  }
+  
+  /* Style the form title */
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #4CAF50;
+  }
+  
+  /* Style the labels */
+  label {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #4ef353;
+  }
+  
+  /* Style the input fields */
+  input[type="text"],
+  input[type="date"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="password"],
+  select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 1.2rem;
+  }
+  
+  /* Style the submit button */
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin-top: 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Style the error messages */
+  .ng-invalid.ng-dirty + div {
+    margin-top: -10px;
+  }
+  
+  .ng-invalid.ng-dirty input {
+    border-color: #f44336;
+  }
+  
+  .ng-invalid.ng-dirty select {
+    border-color: #f44336;
+  }
+  
+  .ng-invalid.ng-dirty + div span {
+    font-size: 1rem;
+    color: #f44336;
+  }
+  
+  /* Add some animations */
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  input[type="tel"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px #4CAF50;
+  }
+  
+  button[type="submit"] {
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="password"],
+  select {
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="text"]:hover,
+  input[type="date"]:hover,
+  input[type="tel"]:hover,
+  input[type="email"]:hover,
+  input[type="password"]:hover,
+  select:hover {
+    border-color: #4CAF50;
+  }
+  
+</style>
+<body>
+  <form method="post" action="/send" name="myForm" onsubmit="return validateForm()">
+    <h2>graVITas Form</h2>
+    
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" ng-model="name" required>
+  
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob" ng-model="dob" required>
+  
+    <label for="session">Session:</label>
+    <select id="session" name="session" ng-model="session" required>
+      <option value="">Select session</option>
+      <option value="2020-21">2020-21</option>
+      <option value="2021-22">2021-22</option>
+      <option value="2022-23">2022-23</option>
+      <option value="2023-24">2023-24</option>
+    </select>
+  
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" ng-model="phone" pattern="[0-9]{10}" required>
+  
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" ng-model="email" required>
+  
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" ng-model="password" required>
+  
+    <label for="confirm-password">Confirm Password:</label>
+    <input type="password" id="confirm-password" name="confirm-password" ng-model="confirmPassword" required>
+  
+    <button type="submit">Submit</button>
+  </form>
+  
+<script>
+   function validateForm() {
+  // Get form elements
+  var name = document.getElementById("name");
+  var dob = document.getElementById("dob");
+  var session = document.getElementById("session");
+  var phone = document.getElementById("phone");
+  var email = document.getElementById("email");
+  var password = document.getElementById("password");
+  var confirmPassword = document.getElementById("confirm-password");
+
+  // Check if name field is empty
+  if (name.value == "") {
+    alert("Please enter your name");
+    name.focus();
+    return false;
+  }
+
+  // Check if date of birth field is empty
+  if (dob.value == "") {
+    alert("Please enter your date of birth");
+    dob.focus();
+    return false;
+  }
+
+  // Check if session field is selected
+  if (session.value == "") {
+    alert("Please select your session");
+    session.focus();
+    return false;
+  }
+
+  // Check if phone field is empty or not 10 digits long
+  if (phone.value == "" || phone.value.length != 10) {
+    alert("Please enter a valid phone number");
+    phone.focus();
+    return false;
+  }
+
+  // Check if email field is empty or not valid
+  if (email.value == "" || !validateEmail(email.value)) {
+    alert("Please enter a valid email address");
+    email.focus();
+    return false;
+  }
+
+  // Check if password field is empty or not at least 8 characters long
+  if (password.value == "" || password.value.length < 8) {
+    alert("Please enter a password of at least 8 characters");
+    password.focus();
+    return false;
+  }
+
+  // Check if confirm password field matches password field
+  if (confirmPassword.value != password.value) {
+    alert("Passwords do not match");
+confirmPassword.focus();
+return false;
+}
+
+$.ajax(
+      {
+      url: '/send',
+      type: 'POST',
+      success: function(result){
+          window.open("/payment.html",'_self');
+        }
+      });
+// If all validations pass, return true
+return true;
+}
+
+function validateEmail(email) {
+// Email validation regex pattern
+var emailPattern = /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/;
+
+return emailPattern.test(email);
+}
+
+
+</script>      
+</body>
+</html>
